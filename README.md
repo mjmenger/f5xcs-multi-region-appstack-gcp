@@ -9,18 +9,26 @@ This repo will provide a solution for deploying F5 XCS Multi-Region Multi-Zone A
 The goal of this solution is to provide the infrastructure for a working demo to deploy F5 Distributed Cloud AppStack and Virtual Kubernetes (vk8s) on GCP in multiple regions with multiple zones.
 <!--TOC-->
 
-- [F5 Distributed Cloud GCP AppStack Multi-Region and Multi-Zone Deployment](#f5-distribued-cloud-gcp-appstack-multi-region-and-multi-zone-deployment)
+- [f5xcs-multi-region-appstack-gcp](#f5xcs-multi-region-appstack-gcp)
+- [Distributed Cloud GCP Multi-Region Multi-Zone AppStack](#distributed-cloud-gcp-multi-region-multi-zone-appstack)
   - [To do](#to-do)
-  - [High Level Topology](#topology)
+  - [Topology](#topology)
   - [Requirements](#requirements)
   - [Modules](#modules)
+  - [Inputs](#inputs)
   - [Deployment](#deployment)
   - [Troubleshooting](#troubleshooting)
   - [Support](#support)
   - [Community Code of Conduct](#community-code-of-conduct)
   - [License](#license)
   - [Copyright](#copyright)
-  - [F5 Networks Contributor License Agreement](#f5-networks-contributor-license-agreement)
+    - [F5 Networks Contributor License Agreement](#f5-networks-contributor-license-agreement)
+  - [Requirements](#requirements-1)
+  - [Providers](#providers)
+  - [Modules](#modules-1)
+  - [Resources](#resources)
+  - [Inputs](#inputs-1)
+  - [Outputs](#outputs)
 
 <!--TOC-->
 
