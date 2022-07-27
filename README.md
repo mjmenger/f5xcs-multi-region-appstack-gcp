@@ -9,18 +9,26 @@ This repo will provide a solution for deploying F5 XCS Multi-Region Multi-Zone A
 The goal of this solution is to provide the infrastructure for a working demo to deploy F5 Distributed Cloud AppStack and Virtual Kubernetes (vk8s) on GCP in multiple regions with multiple zones.
 <!--TOC-->
 
-- [F5 Distributed Cloud GCP AppStack Multi-Region and Multi-Zone Deployment](#f5-distribued-cloud-gcp-appstack-multi-region-and-multi-zone-deployment)
+- [f5xcs-multi-region-appstack-gcp](#f5xcs-multi-region-appstack-gcp)
+- [Distributed Cloud GCP Multi-Region Multi-Zone AppStack](#distributed-cloud-gcp-multi-region-multi-zone-appstack)
   - [To do](#to-do)
-  - [High Level Topology](#topology)
+  - [Topology](#topology)
   - [Requirements](#requirements)
   - [Modules](#modules)
+  - [Inputs](#inputs)
   - [Deployment](#deployment)
   - [Troubleshooting](#troubleshooting)
   - [Support](#support)
   - [Community Code of Conduct](#community-code-of-conduct)
   - [License](#license)
   - [Copyright](#copyright)
-  - [F5 Networks Contributor License Agreement](#f5-networks-contributor-license-agreement)
+    - [F5 Networks Contributor License Agreement](#f5-networks-contributor-license-agreement)
+  - [Requirements](#requirements-1)
+  - [Providers](#providers)
+  - [Modules](#modules-1)
+  - [Resources](#resources)
+  - [Inputs](#inputs-1)
+  - [Outputs](#outputs)
 
 <!--TOC-->
 
@@ -55,7 +63,7 @@ The goal of this solution is to provide the infrastructure for a working demo to
     - Manully or Auto Deploy (see [Deployment](#deployment) options below):
 
 ## Topology
-- High Level Topology 
+- High Level Topology
 
 ![Rough Diagram](/images/gcp-appstack.png)
 
@@ -114,7 +122,7 @@ The goal of this solution is to provide the infrastructure for a working demo to
 | <a name="input_volterra_tf_action"></a> [volterra\_tf\_action](#input\_volterra\_tf\_action) | n/a | `string` | `"apply"` |
 | <a name="input_gateway_type"></a> [gateway\_type](#input\_gateway\_type) | n/a | `string` | `"voltstack_cluster"` |
 | <a name="api_url"></a> [api\_url](#input\_api\_url) | n/a | `string` | `"https://f5-xc-lab-app.console.ves.volterra.io/api"` |
-<a name="input_tags"></a> [tags](#input\_tags) | Environment tags for objects | `map(string)` | <pre>{<br>  "application": "f5app",<br>  "costcenter": "f5costcenter",<br>  "creator": "Terraform",<br>  "delete": "True",<br>  "environment": "gcp",<br>  "group": "f5group",<br>  "owner": "f5owner",<br>  "purpose": "public"<br>}</pre> | 
+<a name="input_tags"></a> [tags](#input\_tags) | Environment tags for objects | `map(string)` | <pre>{<br>  "application": "f5app",<br>  "costcenter": "f5costcenter",<br>  "creator": "Terraform",<br>  "delete": "True",<br>  "environment": "gcp",<br>  "group": "f5group",<br>  "owner": "f5owner",<br>  "purpose": "public"<br>}</pre> |
 
 ## Deployment
 
@@ -135,7 +143,7 @@ For auto deployment you can do with the deploy.sh and destroy.sh scripts.
 
 ## Troubleshooting
 
-Please refer to the following: 
+Please refer to the following:
 - F5 Distributed Cloud
     - [F5 Distributed Cloud](https://docs.cloud.f5.com/docs/)
 - Terraform
@@ -168,3 +176,75 @@ If your employer has rights to intellectual property that you create, such as yo
 
 If you are signing on behalf of a company, you represent that you are legally entitled to grant the license recited therein.
 You represent further that each employee of the entity that submits contributions is authorized to submit such contributions on behalf of the entity pursuant to the CLA.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | 4.15.0 |
+| <a name="requirement_http"></a> [http](#requirement\_http) | 2.1.0 |
+| <a name="requirement_volterrarm"></a> [volterrarm](#requirement\_volterrarm) | 0.11.9 |
+
+## Providers
+
+No providers.
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_util"></a> [util](#module\_util) | ./util | n/a |
+| <a name="module_xcs"></a> [xcs](#module\_xcs) | ./xcs | n/a |
+
+## Resources
+
+No resources.
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_adminUserName"></a> [adminUserName](#input\_adminUserName) | REQUIRED: Admin Username for All systems | `string` | `"xadmin"` | no |
+| <a name="input_agility_namespaces"></a> [agility\_namespaces](#input\_agility\_namespaces) | n/a | `number` | `50` | no |
+| <a name="input_api_cert"></a> [api\_cert](#input\_api\_cert) | REQUIRED:  This is the path to the volterra API Key.  See https://volterra.io/docs/how-to/user-mgmt/credentials | `string` | `"./api2.cer"` | no |
+| <a name="input_api_key"></a> [api\_key](#input\_api\_key) | REQUIRED:  This is the path to the volterra API Key.  See https://volterra.io/docs/how-to/user-mgmt/credentials | `string` | `"./api.key"` | no |
+| <a name="input_api_p12_file"></a> [api\_p12\_file](#input\_api\_p12\_file) | REQUIRED:  This is the path to the volterra API Key.  See https://volterra.io/docs/how-to/user-mgmt/credentials | `string` | `"./api-creds.p12"` | no |
+| <a name="input_api_url"></a> [api\_url](#input\_api\_url) | REQUIRED:  This is your volterra API url | `string` | `"https://playground.console.ves.volterra.io/api"` | no |
+| <a name="input_delegated_dns_domain"></a> [delegated\_dns\_domain](#input\_delegated\_dns\_domain) | n/a | `string` | `"testdomain.com"` | no |
+| <a name="input_gateway_type"></a> [gateway\_type](#input\_gateway\_type) | n/a | `string` | `"voltstack_cluster"` | no |
+| <a name="input_gcp_cidr_one"></a> [gcp\_cidr\_one](#input\_gcp\_cidr\_one) | REQUIRED: VNET Network CIDR | `string` | `"10.90.0.0/23"` | no |
+| <a name="input_gcp_cidr_three"></a> [gcp\_cidr\_three](#input\_gcp\_cidr\_three) | REQUIRED: VNET Network CIDR | `string` | `"10.90.4.0/23"` | no |
+| <a name="input_gcp_cidr_two"></a> [gcp\_cidr\_two](#input\_gcp\_cidr\_two) | REQUIRED: VNET Network CIDR | `string` | `"10.90.2.0/23"` | no |
+| <a name="input_gcp_region_one"></a> [gcp\_region\_one](#input\_gcp\_region\_one) | REQUIRED: GCP Region: | `string` | `"us-east4"` | no |
+| <a name="input_gcp_region_three"></a> [gcp\_region\_three](#input\_gcp\_region\_three) | REQUIRED: GCP Region: | `string` | `"europe-west3"` | no |
+| <a name="input_gcp_region_two"></a> [gcp\_region\_two](#input\_gcp\_region\_two) | REQUIRED: GCP Region: | `string` | `"us-west2"` | no |
+| <a name="input_gcp_subnet_one"></a> [gcp\_subnet\_one](#input\_gcp\_subnet\_one) | REQUIRED: Subnet CIDRs | `map(string)` | <pre>{<br>  "external": "10.90.0.0/24"<br>}</pre> | no |
+| <a name="input_gcp_subnet_three"></a> [gcp\_subnet\_three](#input\_gcp\_subnet\_three) | REQUIRED: Subnet CIDRs | `map(string)` | <pre>{<br>  "external": "10.90.4.0/24"<br>}</pre> | no |
+| <a name="input_gcp_subnet_two"></a> [gcp\_subnet\_two](#input\_gcp\_subnet\_two) | REQUIRED: Subnet CIDRs | `map(string)` | <pre>{<br>  "external": "10.90.2.0/24"<br>}</pre> | no |
+| <a name="input_gcp_zone_one_a"></a> [gcp\_zone\_one\_a](#input\_gcp\_zone\_one\_a) | REQUIRED: GCP Region: | `string` | `"us-east4-a"` | no |
+| <a name="input_gcp_zone_one_b"></a> [gcp\_zone\_one\_b](#input\_gcp\_zone\_one\_b) | REQUIRED: GCP Region: | `string` | `"us-east4-b"` | no |
+| <a name="input_gcp_zone_one_c"></a> [gcp\_zone\_one\_c](#input\_gcp\_zone\_one\_c) | REQUIRED: GCP Region: | `string` | `"us-east4-c"` | no |
+| <a name="input_gcp_zone_three_a"></a> [gcp\_zone\_three\_a](#input\_gcp\_zone\_three\_a) | REQUIRED: GCP Region: | `string` | `"europe-west3-a"` | no |
+| <a name="input_gcp_zone_three_b"></a> [gcp\_zone\_three\_b](#input\_gcp\_zone\_three\_b) | REQUIRED: GCP Region: | `string` | `"europe-west3-b"` | no |
+| <a name="input_gcp_zone_three_c"></a> [gcp\_zone\_three\_c](#input\_gcp\_zone\_three\_c) | REQUIRED: GCP Region: | `string` | `"europe-west3-c"` | no |
+| <a name="input_gcp_zone_two_a"></a> [gcp\_zone\_two\_a](#input\_gcp\_zone\_two\_a) | REQUIRED: GCP Region: | `string` | `"us-west2-a"` | no |
+| <a name="input_gcp_zone_two_b"></a> [gcp\_zone\_two\_b](#input\_gcp\_zone\_two\_b) | REQUIRED: GCP Region: | `string` | `"us-west2-b"` | no |
+| <a name="input_gcp_zone_two_c"></a> [gcp\_zone\_two\_c](#input\_gcp\_zone\_two\_c) | REQUIRED: GCP Region: | `string` | `"us-west2-c"` | no |
+| <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | REQUIRED: Instance Type | `string` | `"n1-standard-4"` | no |
+| <a name="input_name"></a> [name](#input\_name) | REQUIRED:  This is name for your deployment | `string` | `"cust-provided"` | no |
+| <a name="input_namespace"></a> [namespace](#input\_namespace) | REQUIRED:  This is your volterra App Namespace | `string` | `"namespace"` | no |
+| <a name="input_projectName"></a> [projectName](#input\_projectName) | REQUIRED: GCP project: | `string` | `"project-name"` | no |
+| <a name="input_sshPublicKey"></a> [sshPublicKey](#input\_sshPublicKey) | OPTIONAL: ssh public key for instances | `string` | `""` | no |
+| <a name="input_sshPublicKeyPath"></a> [sshPublicKeyPath](#input\_sshPublicKeyPath) | OPTIONAL: ssh public key path for instances | `string` | `"~/.ssh/id_rsa.pub"` | no |
+| <a name="input_stack_name"></a> [stack\_name](#input\_stack\_name) | REQUIRED: GCP project: | `string` | `"gcp-app-stack"` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Environment tags for objects | `map(string)` | <pre>{<br>  "application": "f5app",<br>  "costcenter": "f5costcenter",<br>  "creator": "Terraform",<br>  "delete": "True",<br>  "environment": "gcp",<br>  "group": "f5group",<br>  "owner": "f5owner",<br>  "purpose": "public"<br>}</pre> | no |
+| <a name="input_tenant"></a> [tenant](#input\_tenant) | REQUIRED: GCP project: | `string` | `"xc tenant id"` | no |
+| <a name="input_tenant_name"></a> [tenant\_name](#input\_tenant\_name) | REQUIRED:  This is your volterra Tenant Name:  https://<tenant\_name>.console.ves.volterra.io/api | `string` | `"mr-customer"` | no |
+| <a name="input_xcs_tf_action"></a> [xcs\_tf\_action](#input\_xcs\_tf\_action) | Required Variable | `string` | `"plan"` | no |
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->
