@@ -19,5 +19,3 @@ variable "gcp_cidrs" {
 variable "gcp_regions"{
     type = list(string)
 }
-
-
